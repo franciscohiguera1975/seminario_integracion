@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'django_filters',
     'users',
     'catalog',
+    'invoices.apps.InvoicesConfig',
+    'warehouses'
 ]
 
 MIDDLEWARE = [
