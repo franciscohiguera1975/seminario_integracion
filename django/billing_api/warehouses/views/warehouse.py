@@ -47,7 +47,7 @@ def warehouses_get_by_id(request, warehouse_id: int):
 
 
 @api_view(["PUT"])
-def warehouses_get_by_id(request, warehouse_id: int):
+def warehouses_put(request, warehouse_id: int):
     try:
         warehouse = Warehouse.objects.get(pk=warehouse_id)    
     except Warehouse.DoesNotExist:
@@ -63,3 +63,17 @@ def warehouses_get_by_id(request, warehouse_id: int):
     return Response(
         serializer.errors, 
         status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(["DELETE"])
+def warehouses_delete(request, warehouse_id: int):
+    try:
+        warehouse = Warehouse.objects.get(pk=warehouse_id)    
+    except Warehouse.DoesNotExist:
+        return Response(
+            {
+            'Detail': 'NotFound'
+            },
+            status=status.HTTP_404_NOT_FOUND)
+    warehouse.delete()
+    return Response({"detail": "Registro Eliminado"}, status=status.HTTP_200_OK)
+    
